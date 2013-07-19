@@ -55,5 +55,9 @@
     		android:layout_weight="1"
     		android:hint="Choose your class..."/>
     </LinearLayout>
-    
+    <Button
+        android:id="@+id/page1button"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Continue To Stats"/>
 </LinearLayout>

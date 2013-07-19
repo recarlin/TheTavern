@@ -8,5 +8,52 @@
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Hello"/>
+        android:text="Create New Character"
+        android:textSize="36sp"/>
+    <LinearLayout 
+        android:layout_width="match_parent"
+    	android:layout_height="match_parent"
+    	android:orientation="horizontal">
+        <TextView
+            android:layout_width="wrap_content"
+    		android:layout_height="wrap_content"
+    		android:text="1. Name"/>
+        <EditText
+            android:id="@+id/pickName"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+    		android:layout_weight="1"
+    		android:hint="Choose your name..."/>
+    </LinearLayout>
+    <LinearLayout 
+        android:layout_width="match_parent"
+    	android:layout_height="match_parent"
+    	android:orientation="horizontal">
+        <TextView
+            android:layout_width="wrap_content"
+    		android:layout_height="wrap_content"
+    		android:text="2. Race"/>
+        <EditText
+            android:id="@+id/pickRace"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+    		android:layout_weight="1"
+    		android:hint="Choose your race..."/>
+    </LinearLayout>
+    <LinearLayout 
+        android:layout_width="match_parent"
+    	android:layout_height="match_parent"
+    	android:orientation="horizontal">
+        <TextView
+            android:layout_width="wrap_content"
+    		android:layout_height="wrap_content"
+    		android:text="3. Class"/>
+        <EditText
+            android:id="@+id/pickClass"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+    		android:layout_weight="1"
+    		android:hint="Choose your class..."/>
+    </LinearLayout>
+    
 </LinearLayout>

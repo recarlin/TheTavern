@@ -18,8 +18,8 @@ public class CreateCharacterPage1 extends Fragment
 		
 		LinearLayout view = (LinearLayout) inflater.inflate(R.layout.ccp1, null);
 		
-		Button back = (Button) view.findViewById(R.id.page1button);
-    	back.setOnClickListener(new View.OnClickListener() {
+		Button save = (Button) view.findViewById(R.id.saveButton);
+    	save.setOnClickListener(new View.OnClickListener() {
     		@Override
     		public void onClick(View v) {
     			Intent page2 = new Intent(getActivity().getApplicationContext(), CreateCharacterPage2.class);

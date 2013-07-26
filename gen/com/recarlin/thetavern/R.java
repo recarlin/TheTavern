@@ -26,7 +26,7 @@ public final class R {
     public static final class id {
         public static final int action_settings=0x7f08001c;
         public static final int fragment_container=0x7f08001b;
-        public static final int page2button=0x7f08001a;
+        public static final int pickAmount=0x7f08001a;
         public static final int pickClass=0x7f080002;
         public static final int pickFeat1=0x7f08000f;
         public static final int pickFeat2=0x7f080010;
@@ -38,9 +38,9 @@ public final class R {
         public static final int pickSkill4=0x7f080014;
         public static final int pickSkill5=0x7f080015;
         public static final int pickSkill6=0x7f080016;
-        public static final int pickStats=0x7f080018;
-        public static final int pickTest=0x7f080019;
-        public static final int saveButton=0x7f080017;
+        public static final int pickSkill7=0x7f080017;
+        public static final int pickType=0x7f080019;
+        public static final int saveButton=0x7f080018;
         public static final int stat1=0x7f080003;
         public static final int stat2=0x7f080005;
         public static final int stat3=0x7f080007;
@@ -56,11 +56,9 @@ public final class R {
     }
     public static final class layout {
         public static final int ccp1=0x7f030000;
-        public static final int ccp2=0x7f030001;
-        public static final int ccp3=0x7f030002;
-        public static final int cl=0x7f030003;
-        public static final int dr=0x7f030004;
-        public static final int ts=0x7f030005;
+        public static final int cl=0x7f030001;
+        public static final int dr=0x7f030002;
+        public static final int ts=0x7f030003;
     }
     public static final class menu {
         public static final int create_character_page1=0x7f070000;

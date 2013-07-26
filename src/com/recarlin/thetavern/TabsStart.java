@@ -25,7 +25,7 @@ public class TabsStart extends Activity {
         ActionBar.Tab clt = actionbar.newTab().setText("Fragment B");
         ActionBar.Tab drt = actionbar.newTab().setText("Fragment B");
         
-        Fragment cc = new CreateCharacterPage1();
+        Fragment cc = new CreateCharacter();
         Fragment cl = new CharacterList();
         Fragment dr = new DiceRoller();
 

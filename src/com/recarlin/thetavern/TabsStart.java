@@ -11,13 +11,14 @@ import android.view.Menu;
 
 public class TabsStart extends Activity {
 	public static Context ap;
+	public static String PACKAGE_NAME;
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
         setContentView(R.layout.ts);
         ap = getApplicationContext();
-
-       //ActionBar
+        PACKAGE_NAME = getApplicationContext().getPackageName();
+        
         ActionBar actionbar = getActionBar();
         actionbar.setNavigationMode(ActionBar.NAVIGATION_MODE_TABS);
         

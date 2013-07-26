@@ -28,9 +28,10 @@ public final class R {
         public static final int ic_launcher=0x7f020000;
     }
     public static final class id {
-        public static final int action_settings=0x7f090027;
-        public static final int fragment_container=0x7f090026;
-        public static final int pickAmount=0x7f09001a;
+        public static final int action_settings=0x7f090028;
+        public static final int derp=0x7f090019;
+        public static final int fragment_container=0x7f090027;
+        public static final int pickAmount=0x7f09001b;
         public static final int pickClass=0x7f090002;
         public static final int pickFeat1=0x7f09000f;
         public static final int pickFeat2=0x7f090010;
@@ -43,18 +44,18 @@ public final class R {
         public static final int pickSkill5=0x7f090015;
         public static final int pickSkill6=0x7f090016;
         public static final int pickSkill7=0x7f090017;
-        public static final int pickType=0x7f090019;
-        public static final int result1=0x7f09001c;
-        public static final int result10=0x7f090025;
-        public static final int result2=0x7f090021;
-        public static final int result3=0x7f09001d;
-        public static final int result4=0x7f090022;
-        public static final int result5=0x7f09001e;
-        public static final int result6=0x7f090023;
-        public static final int result7=0x7f09001f;
-        public static final int result8=0x7f090024;
-        public static final int result9=0x7f090020;
-        public static final int rollButton=0x7f09001b;
+        public static final int pickType=0x7f09001a;
+        public static final int result1=0x7f09001d;
+        public static final int result10=0x7f090026;
+        public static final int result2=0x7f090022;
+        public static final int result3=0x7f09001e;
+        public static final int result4=0x7f090023;
+        public static final int result5=0x7f09001f;
+        public static final int result6=0x7f090024;
+        public static final int result7=0x7f090020;
+        public static final int result8=0x7f090025;
+        public static final int result9=0x7f090021;
+        public static final int rollButton=0x7f09001c;
         public static final int saveButton=0x7f090018;
         public static final int stat1=0x7f090003;
         public static final int stat2=0x7f090005;

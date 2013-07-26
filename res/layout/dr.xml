@@ -6,6 +6,7 @@
     android:layout_gravity="center"
     android:orientation="vertical" >
     <TextView
+        android:id="@+id/derp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="Dice Roller"

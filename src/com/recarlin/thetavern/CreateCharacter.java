@@ -11,19 +11,17 @@ import android.app.AlertDialog;
 import android.app.Fragment;
 import android.content.Context;
 import android.content.DialogInterface;
-import android.content.Intent;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.webkit.WebView.FindListener;
 import android.widget.Button;
 import android.widget.LinearLayout;
 
 public class CreateCharacter extends Fragment
 {
-	Activity act = getActivity();
-	Context con = getActivity().getApplicationContext();
+	Activity act;
+	Context con;
 	
 	private static String pickedRace;
 	private static String pickedClass;
@@ -47,8 +45,10 @@ public class CreateCharacter extends Fragment
 	}
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-		
 		LinearLayout view = (LinearLayout) inflater.inflate(R.layout.ccp1, null);
+		
+		act = getActivity();
+		con = act.getApplicationContext();
 		
 		Button save = (Button) view.findViewById(R.id.saveButton);
     	save.setOnClickListener(new View.OnClickListener() {

@@ -20,4 +20,138 @@
         <item>9</item>
         <item>10</item>
     </string-array>
+    <string-array name="races">
+        <item>Dwarf</item>
+		<item>Elf</item>
+		<item>Gnome</item>
+		<item>Half-Elf</item>
+		<item>Half-Orc</item>
+		<item>Halfling</item>
+		<item>Human</item>
+    </string-array>
+    <string-array name="classes">
+        <item>Barbarian</item>
+		<item>Bard</item>
+		<item>Cleric</item>
+		<item>Druid</item>
+		<item>Fighter</item>
+		<item>Monk</item>
+		<item>Paladin</item>
+		<item>Psion</item>
+		<item>Psychic Warrior</item>
+		<item>Ranger</item>
+		<item>Rogue</item>
+		<item>Sorcerer</item>
+		<item>Soulknife</item>
+		<item>Wilder</item>
+		<item>Wizard</item>
+    </string-array>
+    <string-array name="stats">
+        <item>Strength</item>
+		<item>Dexterity</item>
+		<item>Constitution</item>
+		<item>Intelligence</item>
+		<item>Wisdom</item>
+		<item>Charisma</item>
+    </string-array>
+    <string-array name="feats">
+        <item>Ability Focus</item>
+		<item>Acrobatic</item>
+		<item>Agile</item>
+		<item>Alertness</item>
+		<item>Animal Affinity</item>
+		<item>Athletic</item>
+		<item>Blind-Fight</item>
+		<item>Combat Casting</item>
+		<item>Combat Expertise</item>
+		<item>Combat Reflexes</item>
+		<item>Deceitful</item>
+		<item>Deft Hands</item>
+		<item>Diligent</item>
+		<item>Dodge</item>
+		<item>Empower Spell</item>
+		<item>Empower Spell-Like Ability</item>
+		<item>Endurance</item>
+		<item>Enlarge Spell</item>
+		<item>Eschew Materials</item>
+		<item>Exotic Weapon Proficiency</item>
+		<item>Extend Spell</item>
+		<item>Great Fortitude</item>
+		<item>Heighten Spell</item>
+		<item>Improved Counterspell</item>
+		<item>Improved Initiative</item>
+		<item>Improved Shield Bash</item>
+		<item>Improved Unarmed Strike</item>
+		<item>Investigator</item>
+		<item>Iron Will</item>
+		<item>Lightning Reflexes</item>
+		<item>Magical Aptitude</item>
+		<item>Martial Weapon Proficiency</item>
+		<item>Maximize Spell</item>
+		<item>Negotiator</item>
+		<item>Nimble Fingers</item>
+		<item>Persuasive</item>
+		<item>Point Blank Shot</item>
+		<item>Power Attack</item>
+		<item>Quick Draw</item>
+		<item>Quicken Spell</item>
+		<item>Quicken Spell-Like Ability</item>
+		<item>Rapid Reload</item>
+		<item>Run</item>
+		<item>Self-sufficient</item>
+		<item>Silent Spell</item>
+		<item>Skill Focus</item>
+		<item>Spell Focus</item>
+		<item>Spell Penetration</item>
+		<item>Stealthy</item>
+		<item>Still Spell</item>
+		<item>Toughness</item>
+		<item>Track</item>
+		<item>Two-weapon Fighting</item>
+		<item>Weapon Finesse</item>
+		<item>Weapon Focus</item>
+		<item>Widen Spell</item>
+    </string-array>
+    <string-array name="skills">
+        <item>Appraise</item>
+		<item>Autohypnosis</item>
+		<item>Balance</item>
+		<item>Bluff</item>
+		<item>Climb</item>
+		<item>Concentration</item>
+		<item>Control Shape</item>
+		<item>Craft</item>
+		<item>Decipher Script</item>
+		<item>Diplomacy</item>
+		<item>Disable Device</item>
+		<item>Disguise</item>
+		<item>Escape Artist</item>
+		<item>Forgery</item>
+		<item>Gather Information</item>
+		<item>Handle Animal</item>
+		<item>Heal</item>
+		<item>Hide</item>
+		<item>Intimidate</item>
+		<item>Jump</item>
+		<item>Knowledge</item>
+		<item>Listen</item>
+		<item>Move Silently</item>
+		<item>Open Lock</item>
+		<item>Perform</item>
+		<item>Psicraft</item>
+		<item>Profession</item>
+		<item>Ride</item>
+		<item>Search</item>
+		<item>Sense Motive</item>
+		<item>Sleight of Hand</item>
+		<item>Speak Language</item>
+		<item>Spellcraft</item>
+		<item>Spot</item>
+		<item>Survival</item>
+		<item>Swim</item>
+		<item>Tumble</item>
+		<item>Use Magic Device</item>
+		<item>Use Psionic Device</item>
+		<item>Use Rope</item>
+    </string-array>
 </resources>

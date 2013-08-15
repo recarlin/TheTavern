@@ -3,19 +3,21 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
 	android:layout_height="match_parent"
-	android:orientation="vertical" >
+	android:orientation="vertical"
+	style="@style/Basic">
 	<ScrollView
+	    android:id="@+id/scroll"
 	    android:layout_width="match_parent"
 	    android:layout_height="match_parent">
 		<LinearLayout
 		    android:layout_width="match_parent"
-		    android:layout_height="match_parent"
+		    android:layout_height="wrap_content"
 		    android:orientation="vertical" >
 		    <TextView
 		        android:layout_width="match_parent"
 		        android:layout_height="wrap_content"
 		        android:text="Create New Character"
-		        android:textSize="36sp"/>
+		        style="@style/Title"/>
 		    <LinearLayout 
 		        android:layout_width="match_parent"
 		    	android:layout_height="match_parent"
@@ -24,7 +26,8 @@
 		            android:layout_width="wrap_content"
 		    		android:layout_height="wrap_content"
 		    		android:layout_weight=".1"
-		    		android:text="1. Name"/>
+		    		android:text="1. Name"
+		    		style="@style/Basic"/>
 		        <EditText
 		            android:id="@+id/pickName"
 		            android:layout_width="0dp"
@@ -32,6 +35,39 @@
 		    		android:layout_weight=".9"
 		    		android:hint="Choose your name..."/>
 		    </LinearLayout>
+		    <LinearLayout 
+		        android:layout_width="match_parent"
+		    	android:layout_height="match_parent"
+		    	android:orientation="horizontal">
+		        <LinearLayout
+		            android:layout_width="wrap_content"
+		            android:layout_height="match_parent"
+		            android:orientation="vertical">
+		            <TextView
+			            android:layout_width="wrap_content"
+			    		android:layout_height="wrap_content"
+			    		android:text="2. Portrait"
+			    		style="@style/Basic"/>
+		            <Button
+		                android:id="@+id/takePicture"
+		                android:layout_width="wrap_content"
+			    		android:layout_height="match_parent"
+			    		android:layout_gravity="center_vertical"
+			    		android:text="S\nE\nL\nE\nC\nT"
+			            android:focusableInTouchMode="true"/>
+		        </LinearLayout>
+		        <ImageView
+		            android:id="@+id/portrait"
+		            android:layout_width="200sp"
+		            android:layout_height="200sp"
+		            android:background="#A89D00"
+		            android:layout_gravity="center"
+		            android:layout_margin="20dp"
+		            android:contentDescription="Character Portrait"/>
+		    </LinearLayout>
+		    <View
+		  		android:layout_width="match_parent"
+		  		android:layout_height="20dp"/>
 		    <View
 		  		android:layout_width="match_parent"
 		  		android:layout_height="20dp"/>
@@ -43,12 +79,29 @@
 		            android:layout_width="wrap_content"
 		    		android:layout_height="wrap_content"
 		    		android:layout_weight=".1"
-		    		android:text="2. Race"/>
-		        <Spinner
-		            android:id="@+id/pickRace"
+		    		android:text="3. Race"
+		    		style="@style/Basic"/>
+		        <LinearLayout
 		            android:layout_width="0dp"
 		            android:layout_height="wrap_content"
-		    		android:layout_weight=".9"/>
+			    	android:layout_weight=".9"
+			    	android:orientation="vertical">
+			    	<Button
+		                android:id="@+id/raceInfo"
+		                android:layout_width="wrap_content"
+			    		android:layout_height="30sp"
+			    		android:text="Information"
+			    		android:layout_gravity="right"
+			    		style="@style/InfoButton"
+			    		android:layout_marginRight="20sp"/>
+			    	<View
+				  		android:layout_width="match_parent"
+				  		android:layout_height="10dp"/>
+		            <Spinner
+			            android:id="@+id/pickRace"
+			            android:layout_width="match_parent"
+			            android:layout_height="wrap_content"/>
+		        </LinearLayout>
 		    </LinearLayout>
 		    <View
 		  		android:layout_width="match_parent"
@@ -61,12 +114,29 @@
 		            android:layout_width="wrap_content"
 		    		android:layout_height="wrap_content"
 		    		android:layout_weight=".1"
-		    		android:text="3. Class"/>
-		        <Spinner
-		            android:id="@+id/pickClass"
+		    		android:text="4. Class"
+		    		style="@style/Basic"/>
+		        <LinearLayout
 		            android:layout_width="0dp"
 		            android:layout_height="wrap_content"
-		    		android:layout_weight=".9"/>
+			    	android:layout_weight=".9"
+			    	android:orientation="vertical">
+			    	<Button
+		                android:id="@+id/classInfo"
+		                android:layout_width="wrap_content"
+			    		android:layout_height="30sp"
+			    		android:text="Information"
+			    		android:layout_gravity="right"
+			    		style="@style/InfoButton"
+			    		android:layout_marginRight="20sp"/>
+			    	<View
+				  		android:layout_width="match_parent"
+				  		android:layout_height="10dp"/>
+		            <Spinner
+			            android:id="@+id/pickClass"
+			            android:layout_width="match_parent"
+			            android:layout_height="wrap_content"/>
+		        </LinearLayout>
 		    </LinearLayout>
 		    <View
 		  		android:layout_width="match_parent"
@@ -75,23 +145,50 @@
 		        android:layout_width="match_parent"
 		    	android:layout_height="match_parent"
 		    	android:orientation="horizontal">
-		        <TextView
-		            android:layout_width="wrap_content"
-		    		android:layout_height="wrap_content"
-		    		android:layout_weight=".1"
-		    		android:text="4. Stats"/>
+		        <LinearLayout
+		            android:layout_width="0dp"
+		    		android:layout_height="match_parent"
+		    		android:layout_weight=".2"
+		    		android:orientation="vertical">
+		            <TextView
+			            android:layout_width="wrap_content"
+			    		android:layout_height="wrap_content"
+			    		android:text="5. Stats"
+			    		style="@style/Basic"/>
+		            <View
+		                android:layout_width="match_parent"
+		                android:layout_height="10dp"/>
+		            <Button
+		                android:id="@+id/rollStats"
+		                android:layout_width="wrap_content"
+			    		android:layout_height="match_parent"
+			    		android:layout_gravity="center_vertical"
+			    		android:text="R\nO\nL\nL\n\nS\nT\nA\nT\nS"
+			            android:focusableInTouchMode="true"/>
+		        </LinearLayout>
 		        <LinearLayout 
 		            android:layout_width="0dp"
 		            android:layout_height="wrap_content"
-		            android:layout_weight=".9"
+		            android:layout_weight=".8"
 		            android:orientation="vertical">
+		            <Button
+		                android:id="@+id/statsInfo"
+						android:layout_width="wrap_content"
+			    		android:layout_height="30sp"
+			    		android:text="Information"
+			    		android:layout_gravity="right"
+			    		style="@style/InfoButton"
+			    		android:layout_marginRight="20sp"/>
+		            <View
+				  		android:layout_width="match_parent"
+				  		android:layout_height="10dp"/>
 		            <LinearLayout
 		                android:layout_width="match_parent"
 		                android:layout_height="match_parent"
 		                android:orientation="horizontal">
 			            <TextView
 			                android:id="@+id/stat1"
-			                android:layout_width="wrap_content"
+			                android:layout_width="10dp"
 			                android:layout_height="wrap_content"
 			                android:text="10"
 			                android:layout_weight=".1"/>
@@ -107,9 +204,9 @@
 		                android:orientation="horizontal">
 			            <TextView
 			                android:id="@+id/stat2"
-			                android:layout_width="wrap_content"
+			                android:layout_width="10dp"
 			                android:layout_height="wrap_content"
-			                android:text="20"
+			                android:text="10"
 			                android:layout_weight=".1"/>
 			            <Spinner
 				            android:id="@+id/statPick2"
@@ -123,9 +220,9 @@
 		                android:orientation="horizontal">
 			            <TextView
 			                android:id="@+id/stat3"
-			                android:layout_width="wrap_content"
+			                android:layout_width="10dp"
 			                android:layout_height="wrap_content"
-			                android:text="30"
+			                android:text="10"
 			                android:layout_weight=".1"/>
 			            <Spinner
 				            android:id="@+id/statPick3"
@@ -139,9 +236,9 @@
 		                android:orientation="horizontal">
 			            <TextView
 			                android:id="@+id/stat4"
-			                android:layout_width="wrap_content"
+			                android:layout_width="10dp"
 			                android:layout_height="wrap_content"
-			                android:text="40"
+			                android:text="10"
 			                android:layout_weight=".1"/>
 			            <Spinner
 				            android:id="@+id/statPick4"
@@ -155,9 +252,9 @@
 		                android:orientation="horizontal">
 			            <TextView
 			                android:id="@+id/stat5"
-			                android:layout_width="wrap_content"
+			                android:layout_width="10dp"
 			                android:layout_height="wrap_content"
-			                android:text="50"
+			                android:text="10"
 			                android:layout_weight=".1"/>
 			            <Spinner
 				            android:id="@+id/statPick5"
@@ -171,9 +268,9 @@
 		                android:orientation="horizontal">
 			            <TextView
 			                android:id="@+id/stat6"
-			                android:layout_width="wrap_content"
+			                android:layout_width="10dp"
 			                android:layout_height="wrap_content"
-			                android:text="60"
+			                android:text="10"
 			                android:layout_weight=".1"/>
 			            <Spinner
 				            android:id="@+id/statPick6"
@@ -193,21 +290,26 @@
 		     	<TextView
 		            android:layout_width="wrap_content"
 		    		android:layout_height="wrap_content"
-		    		android:layout_weight=".15"
-		    		android:text="5. Feats"/>
+		    		android:layout_weight=".1"
+		    		android:text="6. Feat"
+		    		style="@style/Basic"/>
 		        <LinearLayout 
 		        android:layout_width="0dp"
 		    	android:layout_height="wrap_content"
 		    	android:layout_weight=".9"
 		    	android:orientation="vertical">
-		        <Spinner
-		            android:id="@+id/pickFeat1"
-		            android:layout_width="match_parent"
-		            android:layout_height="wrap_content"/>
-		        <Spinner
-		            android:id="@+id/pickFeat2"
-		            android:layout_width="match_parent"
-		            android:layout_height="wrap_content"/>
+			     	<Button
+		                android:id="@+id/featInfo"
+						android:layout_width="wrap_content"
+			    		android:layout_height="30sp"
+			    		android:text="Information"
+			    		android:layout_gravity="right"
+			    		style="@style/InfoButton"
+			    		android:layout_marginRight="20sp"/>
+			        <Spinner
+			            android:id="@+id/pickFeat1"
+			            android:layout_width="match_parent"
+			            android:layout_height="wrap_content"/>
 		   		</LinearLayout>
 		   	</LinearLayout>
 		   	<View
@@ -221,40 +323,49 @@
 		            android:layout_width="wrap_content"
 		    		android:layout_height="wrap_content"
 		    		android:layout_weight=".1"
-		    		android:text="6. Skills"/>
+		    		android:text="7. Skills"
+		    		style="@style/Basic"/>
 		        <LinearLayout 
 		        android:layout_width="0dp"
 		    	android:layout_height="wrap_content"
 		    	android:layout_weight=".9"
 		    	android:orientation="vertical">
-		        <Spinner
-		            android:id="@+id/pickSkill1"
-		            android:layout_width="match_parent"
-		            android:layout_height="wrap_content"/>
-		        <Spinner
-		            android:id="@+id/pickSkill2"
-		            android:layout_width="match_parent"
-		            android:layout_height="wrap_content"/>
-		        <Spinner
-		            android:id="@+id/pickSkill3"
-		            android:layout_width="match_parent"
-		            android:layout_height="wrap_content"/>
-		        <Spinner
-		            android:id="@+id/pickSkill4"
-		            android:layout_width="match_parent"
-		            android:layout_height="wrap_content"/>
-		        <Spinner
-		            android:id="@+id/pickSkill5"
-		            android:layout_width="match_parent"
-		            android:layout_height="wrap_content"/>
-		        <Spinner
-		            android:id="@+id/pickSkill6"
-		            android:layout_width="match_parent"
-		            android:layout_height="wrap_content"/>
-		        <Spinner
-		            android:id="@+id/pickSkill7"
-		            android:layout_width="match_parent"
-		            android:layout_height="wrap_content"/>
+			        <Button
+		                android:id="@+id/skillsInfo"
+						android:layout_width="wrap_content"
+			    		android:layout_height="30sp"
+			    		android:text="Information"
+			    		android:layout_gravity="right"
+			    		style="@style/InfoButton"
+			    		android:layout_marginRight="20sp"/>
+			        <Spinner
+			            android:id="@+id/pickSkill1"
+			            android:layout_width="match_parent"
+			            android:layout_height="wrap_content"/>
+			        <Spinner
+			            android:id="@+id/pickSkill2"
+			            android:layout_width="match_parent"
+			            android:layout_height="wrap_content"/>
+			        <Spinner
+			            android:id="@+id/pickSkill3"
+			            android:layout_width="match_parent"
+			            android:layout_height="wrap_content"/>
+			        <Spinner
+			            android:id="@+id/pickSkill4"
+			            android:layout_width="match_parent"
+			            android:layout_height="wrap_content"/>
+			        <Spinner
+			            android:id="@+id/pickSkill5"
+			            android:layout_width="match_parent"
+			            android:layout_height="wrap_content"/>
+			        <Spinner
+			            android:id="@+id/pickSkill6"
+			            android:layout_width="match_parent"
+			            android:layout_height="wrap_content"/>
+			        <Spinner
+			            android:id="@+id/pickSkill7"
+			            android:layout_width="match_parent"
+			            android:layout_height="wrap_content"/>
 		   		</LinearLayout>
 		   	</LinearLayout>
 		    <View

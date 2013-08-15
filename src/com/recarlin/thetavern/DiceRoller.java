@@ -2,12 +2,13 @@ package com.recarlin.thetavern;
 
 import java.lang.reflect.Field;
 
+import com.recarlin.thetavern.R.id;
+
 import utilities.RandomNumber;
 import android.os.Bundle;
 import android.app.Activity;
 import android.app.Fragment;
 import android.content.Context;
-import android.graphics.SumPathEffect;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -70,7 +71,7 @@ public class DiceRoller extends Fragment implements OnItemSelectedListener
 						
 						String nmb2str = Integer.toString(i+1);
 						String resultIDString = "result"+nmb2str;
-						Class cls = R.id.class;
+						Class<id> cls = R.id.class;
 						Field f = cls.getField(resultIDString);
 						int id = f.getInt(null);
 						TextView resultTextView = (TextView) vw.findViewById(id);

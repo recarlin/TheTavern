@@ -21,11 +21,19 @@
     <style name="Title">
         <item name="android:background">#FFD900</item>
         <item name="android:textSize">30sp</item>
+        <item name="android:gravity">center</item>
     </style>
 
     <style name="InfoButton">
         <item name="android:textSize">12sp</item>
         <item name="android:textColor">#AB7500</item>
+        <item name="android:padding">5sp</item>
+    </style>
+    
+    <style name="InfoPopUp">
+        <item name="android:background">#AB7500</item>
+        <item name="android:textSize">12sp</item>
+        <item name="android:textColor">#FFD900</item>
         <item name="android:padding">5sp</item>
     </style>
 </resources>

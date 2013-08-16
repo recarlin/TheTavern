@@ -354,18 +354,6 @@
 			            android:id="@+id/pickSkill4"
 			            android:layout_width="match_parent"
 			            android:layout_height="wrap_content"/>
-			        <Spinner
-			            android:id="@+id/pickSkill5"
-			            android:layout_width="match_parent"
-			            android:layout_height="wrap_content"/>
-			        <Spinner
-			            android:id="@+id/pickSkill6"
-			            android:layout_width="match_parent"
-			            android:layout_height="wrap_content"/>
-			        <Spinner
-			            android:id="@+id/pickSkill7"
-			            android:layout_width="match_parent"
-			            android:layout_height="wrap_content"/>
 		   		</LinearLayout>
 		   	</LinearLayout>
 		    <View

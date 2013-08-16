@@ -13,13 +13,12 @@ import utilities.ReadWrite;
 import android.os.Bundle;
 import android.annotation.SuppressLint;
 import android.app.Activity;
-import android.app.AlertDialog;
 import android.app.Fragment;
 import android.content.Context;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.util.Log;
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -27,33 +26,19 @@ import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemSelectedListener;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.PopupWindow;
 import android.widget.Spinner;
 import android.widget.TextView;
 
 public class CreateCharacter extends Fragment implements OnItemSelectedListener
 {
+	private PopupWindow infoWindow;
+	
 	Activity act;
 	Context con;
-	
-	private static String pickedRace;
-	private static String pickedClass;
-	private static int pickedStatSTR;
-	private static int pickedStatDEX;
-	private static int pickedStatCON;
-	private static int pickedStatINT;
-	private static int pickedStatWIS;
-	private static int pickedStatCHA;
-	private static String pickedFeat1;
-	private static String pickedFeat2;
-	private static String pickedSkill1;
-	private static String pickedSkill2;
-	private static String pickedSkill3;
-	private static String pickedSkill4;
-	private static String pickedSkill5;
-	private static String pickedSkill6;
-	private static String pickedSkill7;
 	
 	public CreateCharacter() {
 	}
@@ -129,15 +114,6 @@ public class CreateCharacter extends Fragment implements OnItemSelectedListener
 			
 			((Spinner) vw.findViewById(R.id.pickSkill4)).setOnItemSelectedListener(this);
 			((Spinner) vw.findViewById(R.id.pickSkill4)).setAdapter(skillsAdpt);
-			
-			((Spinner) vw.findViewById(R.id.pickSkill5)).setOnItemSelectedListener(this);
-			((Spinner) vw.findViewById(R.id.pickSkill5)).setAdapter(skillsAdpt);
-			
-			((Spinner) vw.findViewById(R.id.pickSkill6)).setOnItemSelectedListener(this);
-			((Spinner) vw.findViewById(R.id.pickSkill6)).setAdapter(skillsAdpt);
-			
-			((Spinner) vw.findViewById(R.id.pickSkill7)).setOnItemSelectedListener(this);
-			((Spinner) vw.findViewById(R.id.pickSkill7)).setAdapter(skillsAdpt);
 		} catch (NullPointerException e) {
 			Log.e("ERROR", e.toString());
 		}
@@ -154,35 +130,35 @@ public class CreateCharacter extends Fragment implements OnItemSelectedListener
     	infoRace.setOnClickListener(new View.OnClickListener() {
     		@Override
     		public void onClick(View v) {
-    			
+    			infoPopUp();
     		}
     	});
     	Button infoClass = (Button) vw.findViewById(R.id.classInfo);
     	infoClass.setOnClickListener(new View.OnClickListener() {
     		@Override
     		public void onClick(View v) {
-    			
+    			infoPopUp();
     		}
     	});
     	Button infoStats = (Button) vw.findViewById(R.id.statsInfo);
     	infoStats.setOnClickListener(new View.OnClickListener() {
     		@Override
     		public void onClick(View v) {
-    			
+    			infoPopUp();
     		}
     	});
     	Button infoFeats = (Button) vw.findViewById(R.id.featInfo);
     	infoFeats.setOnClickListener(new View.OnClickListener() {
     		@Override
     		public void onClick(View v) {
-    			
+    			infoPopUp();
     		}
     	});
     	Button infoSkills = (Button) vw.findViewById(R.id.skillsInfo);
     	infoSkills.setOnClickListener(new View.OnClickListener() {
     		@Override
     		public void onClick(View v) {
-    			
+    			infoPopUp();
     		}
     	});
     	Button picture = (Button) vw.findViewById(R.id.takePicture);
@@ -217,43 +193,121 @@ public class CreateCharacter extends Fragment implements OnItemSelectedListener
 		return vw;
 	}
 	private void GenerateCharacterFile(){
-		String name = act.findViewById(R.id.pickName).toString();
+		String data = "";
+		try {
+			data = ReadWrite.readFile(con, "characters", false);
+			Log.i("DATA", data);
+		} catch (Exception e) {
+			Log.e("ReadFile", "No character file");
+		}
+		
+		String name = ((EditText) act.findViewById(R.id.pickName)).getText().toString();
+		Log.i("NAME", name);
 		JSONObject charas = new JSONObject();
 		JSONObject chara = new JSONObject();
 		try {
-			chara.put("name", name);
-			chara.put("race", pickedRace);
-			chara.put("class", pickedClass);
-			chara.put("STR", pickedStatSTR);
-			chara.put("DEX", pickedStatDEX);
-			chara.put("CON", pickedStatCON);
-			chara.put("INT", pickedStatINT);
-			chara.put("WIS", pickedStatWIS);
-			chara.put("CHA", pickedStatCHA);
-			chara.put("feat1", pickedFeat1);
-			chara.put("feat2", pickedFeat2);
-			chara.put("skill1", pickedSkill1);
-			chara.put("skill2", pickedSkill2);
-			chara.put("skill3", pickedSkill3);
-			chara.put("skill4", pickedSkill4);
-			chara.put("skill5", pickedSkill5);
-			chara.put("skill6", pickedSkill6);
-			chara.put("skill7", pickedSkill7);
+			chara.put("name", name.toString());
 			
-			charas.put(name, chara);
+			Spinner raceSpin = (Spinner)act.findViewById(R.id.pickRace);
+			String raceText = raceSpin.getSelectedItem().toString();
+			chara.put("race", raceText);
 			
-			ReadWrite.storeFile(con, "characters", charas.toString(), false);
+			Spinner classSpin = (Spinner)act.findViewById(R.id.pickClass);
+			String classText = classSpin.getSelectedItem().toString();
+			chara.put("class", classText);
 			
-			AlertDialog alert = new AlertDialog.Builder(con).create();
-			alert.setTitle("Success");
-			alert.setMessage("Character Saved!");
-			alert.setButton(DialogInterface.BUTTON_POSITIVE, "OK", new DialogInterface.OnClickListener() {
-				public void onClick(final DialogInterface dialog, final int which) {
-				}
-			});
-			alert.show();
+			Spinner stat1Spin = (Spinner)act.findViewById(R.id.statPick1);
+			String stat1Text = stat1Spin.getSelectedItem().toString();
+			String result1 = ((TextView)act.findViewById(R.id.stat1)).getText().toString();
+			chara.put("stat1", stat1Text);
+			chara.put("result1", result1);
+			
+			Spinner stat2Spin = (Spinner)act.findViewById(R.id.statPick2);
+			String stat2Text = stat2Spin.getSelectedItem().toString();
+			String result2 = ((TextView)act.findViewById(R.id.stat2)).getText().toString();
+			chara.put("stat2", stat2Text);
+			chara.put("result2", result2);
+			
+			Spinner stat3Spin = (Spinner)act.findViewById(R.id.statPick3);
+			String stat3Text = stat3Spin.getSelectedItem().toString();
+			String result3 = ((TextView)act.findViewById(R.id.stat3)).getText().toString();
+			chara.put("stat3", stat3Text);
+			chara.put("result3", result3);
+			
+			Spinner stat4Spin = (Spinner)act.findViewById(R.id.statPick4);
+			String stat4Text = stat4Spin.getSelectedItem().toString();
+			String result4 = ((TextView)act.findViewById(R.id.stat4)).getText().toString();
+			chara.put("stat4", stat4Text);
+			chara.put("result4", result4);
+			
+			Spinner stat5Spin = (Spinner)act.findViewById(R.id.statPick5);
+			String stat5Text = stat5Spin.getSelectedItem().toString();
+			String result5 = ((TextView)act.findViewById(R.id.stat5)).getText().toString();
+			chara.put("stat5", stat5Text);
+			chara.put("result5", result5);
+			
+			Spinner stat6Spin = (Spinner)act.findViewById(R.id.statPick6);
+			String stat6Text = stat6Spin.getSelectedItem().toString();
+			String result6 = ((TextView)act.findViewById(R.id.stat6)).getText().toString();
+			chara.put("stat6", stat6Text);
+			chara.put("result6", result6);
+			
+			Spinner featSpin = (Spinner)act.findViewById(R.id.pickFeat1);
+			String featText = featSpin.getSelectedItem().toString();
+			chara.put("feat", featText);
+			
+			Spinner skill1Spin = (Spinner)act.findViewById(R.id.pickSkill1);
+			String skill1Text = skill1Spin.getSelectedItem().toString();
+			chara.put("skill1", skill1Text);
+			
+			Spinner skill2Spin = (Spinner)act.findViewById(R.id.pickSkill2);
+			String skill2Text = skill2Spin.getSelectedItem().toString();
+			chara.put("skill2", skill2Text);
+			
+			Spinner skill3Spin = (Spinner)act.findViewById(R.id.pickSkill3);
+			String skill3Text = skill3Spin.getSelectedItem().toString();
+			chara.put("skill3", skill3Text);
+			
+			Spinner skill4Spin = (Spinner)act.findViewById(R.id.pickSkill4);
+			String skill4Text = skill4Spin.getSelectedItem().toString();
+			chara.put("skill4", skill4Text);
 		} catch (JSONException e) {
-			Log.e("ERROR", "JSON exception!");
+			Log.e("ERROR", "First JSON exception!");
+		}
+		if (data == "") {
+			try {
+				charas.put(name, chara);
+				ReadWrite.storeFile(con, "characters", charas.toString(), false);
+				
+//				AlertDialog alert = new AlertDialog.Builder(con).create();
+//				alert.setTitle("Success");
+//				alert.setMessage("Character Saved!");
+//				alert.setButton(DialogInterface.BUTTON_POSITIVE, "OK", new DialogInterface.OnClickListener() {
+//					public void onClick(final DialogInterface dialog, final int which) {
+//					}
+//				});
+//				alert.show();
+			} catch (JSONException e) {
+				Log.e("ERROR", "Second JSON exception!");
+			}
+		} else {
+			try {
+				JSONObject current = new JSONObject(data);
+				current.put(name, chara);
+				ReadWrite.storeFile(con, "characters", current.toString(), false);
+				
+//				AlertDialog alert = new AlertDialog.Builder(con).create();
+//				alert.setTitle("Success");
+//				alert.setMessage("Character Saved!");
+//				alert.setButton(DialogInterface.BUTTON_POSITIVE, "OK", new DialogInterface.OnClickListener() {
+//					public void onClick(final DialogInterface dialog, final int which) {
+//					}
+//				});
+//				alert.show();
+				Log.i("CHARACTER", current.toString());
+			} catch (JSONException e) {
+				Log.e("ERROR", "JSON exception!");
+			}
 		}
 	}
 	@Override
@@ -272,5 +326,19 @@ public class CreateCharacter extends Fragment implements OnItemSelectedListener
 			} catch (Exception e) {
 				Log.e("ERROR", "Problem adding file to ImageView");
 			}
+	}
+	private void infoPopUp() {
+		LayoutInflater inflater = (LayoutInflater) act.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+		View layout = inflater.inflate(R.layout.info_pop_up, (ViewGroup) act.findViewById(R.id.popLL));
+		infoWindow = new PopupWindow(layout, 500, 500, true);
+		infoWindow.showAtLocation(layout, Gravity.CENTER, 0, 0);
+		
+//		Button closePopUp = (Button) act.findViewById(R.id.closeInfo);
+//    	closePopUp.setOnClickListener(new View.OnClickListener() {
+//    		@Override
+//    		public void onClick(View v) {
+//    			infoWindow.dismiss();
+//    		}
+//    	});
 	}
 }

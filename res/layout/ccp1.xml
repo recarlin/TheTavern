@@ -4,7 +4,9 @@
     android:layout_width="match_parent"
 	android:layout_height="match_parent"
 	android:orientation="vertical"
-	style="@style/Basic">
+	style="@style/Basic"
+	android:descendantFocusability="beforeDescendants"
+	android:focusableInTouchMode="true" >
 	<ScrollView
 	    android:id="@+id/scroll"
 	    android:layout_width="match_parent"
@@ -53,8 +55,7 @@
 		                android:layout_width="wrap_content"
 			    		android:layout_height="match_parent"
 			    		android:layout_gravity="center_vertical"
-			    		android:text="S\nE\nL\nE\nC\nT"
-			            android:focusableInTouchMode="true"/>
+			    		android:text="S\nE\nL\nE\nC\nT"/>
 		        </LinearLayout>
 		        <ImageView
 		            android:id="@+id/portrait"
@@ -163,8 +164,7 @@
 		                android:layout_width="wrap_content"
 			    		android:layout_height="match_parent"
 			    		android:layout_gravity="center_vertical"
-			    		android:text="R\nO\nL\nL\n\nS\nT\nA\nT\nS"
-			            android:focusableInTouchMode="true"/>
+			    		android:text="R\nO\nL\nL\n\nS\nT\nA\nT\nS"/>
 		        </LinearLayout>
 		        <LinearLayout 
 		            android:layout_width="0dp"

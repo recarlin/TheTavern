@@ -1,7 +1,10 @@
 package com.recarlin.thetavern;
 
+import java.io.File;
+import java.io.FileOutputStream;
 import java.lang.reflect.Field;
 
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -11,12 +14,14 @@ import utilities.RandomNumber;
 import utilities.ReadWrite;
 
 import android.os.Bundle;
+import android.os.Environment;
 import android.annotation.SuppressLint;
-import android.app.Activity;
 import android.app.Fragment;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.util.Log;
 import android.view.Gravity;
 import android.view.LayoutInflater;
@@ -36,9 +41,7 @@ import android.widget.TextView;
 public class CreateCharacter extends Fragment implements OnItemSelectedListener
 {
 	private PopupWindow infoWindow;
-	
-	Activity act;
-	Context con;
+	private String charName = "";
 	
 	public CreateCharacter() {
 	}
@@ -46,10 +49,7 @@ public class CreateCharacter extends Fragment implements OnItemSelectedListener
 	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 		LinearLayout vw = (LinearLayout) inflater.inflate(R.layout.ccp1, null);
 		
-		act = getActivity();
-		con = act.getApplicationContext();
-		
-		ArrayAdapter<CharSequence> raceAdpt = ArrayAdapter.createFromResource(con, R.array.races, R.layout.spinners);
+		ArrayAdapter<CharSequence> raceAdpt = ArrayAdapter.createFromResource(TabsStart.ap, R.array.races, R.layout.spinners);
 		raceAdpt.setDropDownViewResource(R.layout.spinners);
 		try {
 			((Spinner) vw.findViewById(R.id.pickRace)).setOnItemSelectedListener(this);
@@ -58,7 +58,7 @@ public class CreateCharacter extends Fragment implements OnItemSelectedListener
 			Log.e("ERROR", e.toString());
 		}
 		
-		ArrayAdapter<CharSequence> classAdpt = ArrayAdapter.createFromResource(con, R.array.classes, R.layout.spinners);
+		ArrayAdapter<CharSequence> classAdpt = ArrayAdapter.createFromResource(TabsStart.ap, R.array.classes, R.layout.spinners);
 		classAdpt.setDropDownViewResource(R.layout.spinners);
 		try {
 			((Spinner) vw.findViewById(R.id.pickClass)).setOnItemSelectedListener(this);
@@ -67,7 +67,7 @@ public class CreateCharacter extends Fragment implements OnItemSelectedListener
 			Log.e("ERROR", e.toString());
 		}
 		
-		ArrayAdapter<CharSequence> statsAdpt = ArrayAdapter.createFromResource(con, R.array.stats, R.layout.spinners);
+		ArrayAdapter<CharSequence> statsAdpt = ArrayAdapter.createFromResource(TabsStart.ap, R.array.stats, R.layout.spinners);
 		statsAdpt.setDropDownViewResource(R.layout.spinners);
 		try {
 			((Spinner) vw.findViewById(R.id.statPick1)).setOnItemSelectedListener(this);
@@ -91,7 +91,7 @@ public class CreateCharacter extends Fragment implements OnItemSelectedListener
 			Log.e("ERROR", e.toString());
 		}
 		
-		ArrayAdapter<CharSequence> featAdpt = ArrayAdapter.createFromResource(con, R.array.feats, R.layout.spinners);
+		ArrayAdapter<CharSequence> featAdpt = ArrayAdapter.createFromResource(TabsStart.ap, R.array.feats, R.layout.spinners);
 		featAdpt.setDropDownViewResource(R.layout.spinners);
 		try {
 			((Spinner) vw.findViewById(R.id.pickFeat1)).setOnItemSelectedListener(this);
@@ -100,7 +100,7 @@ public class CreateCharacter extends Fragment implements OnItemSelectedListener
 			Log.e("ERROR", e.toString());
 		}
 		
-		ArrayAdapter<CharSequence> skillsAdpt = ArrayAdapter.createFromResource(con, R.array.skills, R.layout.spinners);
+		ArrayAdapter<CharSequence> skillsAdpt = ArrayAdapter.createFromResource(TabsStart.ap, R.array.skills, R.layout.spinners);
 		skillsAdpt.setDropDownViewResource(R.layout.spinners);
 		try {
 			((Spinner) vw.findViewById(R.id.pickSkill1)).setOnItemSelectedListener(this);
@@ -117,7 +117,18 @@ public class CreateCharacter extends Fragment implements OnItemSelectedListener
 		} catch (NullPointerException e) {
 			Log.e("ERROR", e.toString());
 		}
-		
+			((EditText)vw.findViewById(R.id.pickName)).addTextChangedListener(new TextWatcher() {
+				@Override
+				public void onTextChanged(CharSequence s, int start, int before, int count) {
+				}
+				@Override
+				public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+				}
+				@Override
+				public void afterTextChanged(Editable s) {
+					charName = s.toString();
+				}
+			});
 		Button save = (Button) vw.findViewById(R.id.saveButton);
     	save.setOnClickListener(new View.OnClickListener() {
     		@Override
@@ -182,7 +193,7 @@ public class CreateCharacter extends Fragment implements OnItemSelectedListener
 						Class<id> cls = R.id.class;
 						Field f = cls.getField(resultIDString);
 						int id = f.getInt(null);
-						TextView resultTextView = (TextView) act.findViewById(id);
+						TextView resultTextView = (TextView) TabsStart.act.findViewById(id);
 						resultTextView.setText(String.valueOf(curResult));
 					} catch (Exception e) {
 						Log.e("ERROR", "Cannot set results");
@@ -195,108 +206,93 @@ public class CreateCharacter extends Fragment implements OnItemSelectedListener
 	private void GenerateCharacterFile(){
 		String data = "";
 		try {
-			data = ReadWrite.readFile(con, "characters", false);
-			Log.i("DATA", data);
+			data = ReadWrite.readFile(TabsStart.ap, "characters", false);
 		} catch (Exception e) {
 			Log.e("ReadFile", "No character file");
 		}
 		
-		String name = ((EditText) act.findViewById(R.id.pickName)).getText().toString();
-		Log.i("NAME", name);
-		JSONObject charas = new JSONObject();
+		String name = ((EditText) TabsStart.act.findViewById(R.id.pickName)).getText().toString();
+		JSONArray charas = new JSONArray();
 		JSONObject chara = new JSONObject();
 		try {
-			chara.put("name", name.toString());
+			chara.put("name", name);
 			
-			Spinner raceSpin = (Spinner)act.findViewById(R.id.pickRace);
+			Spinner raceSpin = (Spinner)TabsStart.act.findViewById(R.id.pickRace);
 			String raceText = raceSpin.getSelectedItem().toString();
 			chara.put("race", raceText);
 			
-			Spinner classSpin = (Spinner)act.findViewById(R.id.pickClass);
+			Spinner classSpin = (Spinner)TabsStart.act.findViewById(R.id.pickClass);
 			String classText = classSpin.getSelectedItem().toString();
 			chara.put("class", classText);
 			
-			Spinner stat1Spin = (Spinner)act.findViewById(R.id.statPick1);
+			Spinner stat1Spin = (Spinner)TabsStart.act.findViewById(R.id.statPick1);
 			String stat1Text = stat1Spin.getSelectedItem().toString();
-			String result1 = ((TextView)act.findViewById(R.id.stat1)).getText().toString();
+			String result1 = ((TextView)TabsStart.act.findViewById(R.id.stat1)).getText().toString();
 			chara.put("stat1", stat1Text);
 			chara.put("result1", result1);
 			
-			Spinner stat2Spin = (Spinner)act.findViewById(R.id.statPick2);
+			Spinner stat2Spin = (Spinner)TabsStart.act.findViewById(R.id.statPick2);
 			String stat2Text = stat2Spin.getSelectedItem().toString();
-			String result2 = ((TextView)act.findViewById(R.id.stat2)).getText().toString();
+			String result2 = ((TextView)TabsStart.act.findViewById(R.id.stat2)).getText().toString();
 			chara.put("stat2", stat2Text);
 			chara.put("result2", result2);
 			
-			Spinner stat3Spin = (Spinner)act.findViewById(R.id.statPick3);
+			Spinner stat3Spin = (Spinner)TabsStart.act.findViewById(R.id.statPick3);
 			String stat3Text = stat3Spin.getSelectedItem().toString();
-			String result3 = ((TextView)act.findViewById(R.id.stat3)).getText().toString();
+			String result3 = ((TextView)TabsStart.act.findViewById(R.id.stat3)).getText().toString();
 			chara.put("stat3", stat3Text);
 			chara.put("result3", result3);
 			
-			Spinner stat4Spin = (Spinner)act.findViewById(R.id.statPick4);
+			Spinner stat4Spin = (Spinner)TabsStart.act.findViewById(R.id.statPick4);
 			String stat4Text = stat4Spin.getSelectedItem().toString();
-			String result4 = ((TextView)act.findViewById(R.id.stat4)).getText().toString();
+			String result4 = ((TextView)TabsStart.act.findViewById(R.id.stat4)).getText().toString();
 			chara.put("stat4", stat4Text);
 			chara.put("result4", result4);
 			
-			Spinner stat5Spin = (Spinner)act.findViewById(R.id.statPick5);
+			Spinner stat5Spin = (Spinner)TabsStart.act.findViewById(R.id.statPick5);
 			String stat5Text = stat5Spin.getSelectedItem().toString();
-			String result5 = ((TextView)act.findViewById(R.id.stat5)).getText().toString();
+			String result5 = ((TextView)TabsStart.act.findViewById(R.id.stat5)).getText().toString();
 			chara.put("stat5", stat5Text);
 			chara.put("result5", result5);
 			
-			Spinner stat6Spin = (Spinner)act.findViewById(R.id.statPick6);
+			Spinner stat6Spin = (Spinner)TabsStart.act.findViewById(R.id.statPick6);
 			String stat6Text = stat6Spin.getSelectedItem().toString();
-			String result6 = ((TextView)act.findViewById(R.id.stat6)).getText().toString();
+			String result6 = ((TextView)TabsStart.act.findViewById(R.id.stat6)).getText().toString();
 			chara.put("stat6", stat6Text);
 			chara.put("result6", result6);
 			
-			Spinner featSpin = (Spinner)act.findViewById(R.id.pickFeat1);
+			Spinner featSpin = (Spinner)TabsStart.act.findViewById(R.id.pickFeat1);
 			String featText = featSpin.getSelectedItem().toString();
 			chara.put("feat", featText);
 			
-			Spinner skill1Spin = (Spinner)act.findViewById(R.id.pickSkill1);
+			Spinner skill1Spin = (Spinner)TabsStart.act.findViewById(R.id.pickSkill1);
 			String skill1Text = skill1Spin.getSelectedItem().toString();
 			chara.put("skill1", skill1Text);
 			
-			Spinner skill2Spin = (Spinner)act.findViewById(R.id.pickSkill2);
+			Spinner skill2Spin = (Spinner)TabsStart.act.findViewById(R.id.pickSkill2);
 			String skill2Text = skill2Spin.getSelectedItem().toString();
 			chara.put("skill2", skill2Text);
 			
-			Spinner skill3Spin = (Spinner)act.findViewById(R.id.pickSkill3);
+			Spinner skill3Spin = (Spinner)TabsStart.act.findViewById(R.id.pickSkill3);
 			String skill3Text = skill3Spin.getSelectedItem().toString();
 			chara.put("skill3", skill3Text);
 			
-			Spinner skill4Spin = (Spinner)act.findViewById(R.id.pickSkill4);
+			Spinner skill4Spin = (Spinner)TabsStart.act.findViewById(R.id.pickSkill4);
 			String skill4Text = skill4Spin.getSelectedItem().toString();
 			chara.put("skill4", skill4Text);
 		} catch (JSONException e) {
 			Log.e("ERROR", "First JSON exception!");
 		}
 		if (data == "") {
-			try {
-				charas.put(name, chara);
-				ReadWrite.storeFile(con, "characters", charas.toString(), false);
-				
-//				AlertDialog alert = new AlertDialog.Builder(con).create();
-//				alert.setTitle("Success");
-//				alert.setMessage("Character Saved!");
-//				alert.setButton(DialogInterface.BUTTON_POSITIVE, "OK", new DialogInterface.OnClickListener() {
-//					public void onClick(final DialogInterface dialog, final int which) {
-//					}
-//				});
-//				alert.show();
-			} catch (JSONException e) {
-				Log.e("ERROR", "Second JSON exception!");
-			}
+			charas.put(chara);
+			ReadWrite.storeFile(TabsStart.ap, "characters", charas.toString(), false);
 		} else {
 			try {
-				JSONObject current = new JSONObject(data);
-				current.put(name, chara);
-				ReadWrite.storeFile(con, "characters", current.toString(), false);
+				JSONArray current = new JSONArray(data);
+				current.put(chara);
+				ReadWrite.storeFile(TabsStart.ap, "characters", current.toString(), false);
 				
-//				AlertDialog alert = new AlertDialog.Builder(con).create();
+//				AlertDialog alert = new AlertDialog.Builder(TabsStart.ap).create();
 //				alert.setTitle("Success");
 //				alert.setMessage("Character Saved!");
 //				alert.setButton(DialogInterface.BUTTON_POSITIVE, "OK", new DialogInterface.OnClickListener() {
@@ -304,11 +300,12 @@ public class CreateCharacter extends Fragment implements OnItemSelectedListener
 //					}
 //				});
 //				alert.show();
-				Log.i("CHARACTER", current.toString());
 			} catch (JSONException e) {
 				Log.e("ERROR", "JSON exception!");
 			}
 		}
+		String stuff = ReadWrite.readFile(TabsStart.ap, "characters", false);
+		Log.i("FILE", stuff);
 	}
 	@Override
 	public void onItemSelected(AdapterView<?> arg0, View arg1, int arg2, long arg3){
@@ -320,25 +317,46 @@ public class CreateCharacter extends Fragment implements OnItemSelectedListener
 	}
 	@Override
 	public void onActivityResult(int requestCode, int resultCode, Intent data) {
-            try {
-				Bitmap photo = (Bitmap) data.getExtras().get("data"); 
-				((ImageView)act.findViewById(R.id.portrait)).setImageBitmap(photo);
-			} catch (Exception e) {
-				Log.e("ERROR", "Problem adding file to ImageView");
+        try {
+			Bitmap photo = (Bitmap) data.getExtras().get("data");
+			((ImageView)TabsStart.act.findViewById(R.id.portrait)).setImageBitmap(photo);
+			
+			File dir = new File(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_PICTURES), "/TheTavern");
+			if (! dir.exists()){
+		        if (! dir.mkdirs()){
+		            Log.d("ERROR", "Failed to make directory.");
+		        }
+		    }
+		    if (charName == "") {
+				Log.e("ERROR", "Character has no name to save the picture.");
+			} else {
+			    File file = new File (dir, charName);
+			    if (file.exists ()) file.delete (); 
+			    try {
+			           FileOutputStream out = new FileOutputStream(file);
+			           photo.compress(Bitmap.CompressFormat.JPEG, 90, out);
+			           out.flush();
+			           out.close();
+			    } catch (Exception e) {
+			           Log.e("ERROR", "The picture did not save correctly.");
+			    }
 			}
+		} catch (Exception e) {
+			Log.e("ERROR", "Problem adding file to ImageView");
+		}
 	}
 	private void infoPopUp() {
-		LayoutInflater inflater = (LayoutInflater) act.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-		View layout = inflater.inflate(R.layout.info_pop_up, (ViewGroup) act.findViewById(R.id.popLL));
+		LayoutInflater inflater = (LayoutInflater) TabsStart.act.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+		View layout = inflater.inflate(R.layout.info_pop_up, (ViewGroup) TabsStart.act.findViewById(R.id.popLL));
 		infoWindow = new PopupWindow(layout, 500, 500, true);
 		infoWindow.showAtLocation(layout, Gravity.CENTER, 0, 0);
 		
-//		Button closePopUp = (Button) act.findViewById(R.id.closeInfo);
-//    	closePopUp.setOnClickListener(new View.OnClickListener() {
-//    		@Override
-//    		public void onClick(View v) {
-//    			infoWindow.dismiss();
-//    		}
-//    	});
+		Button closePopUp = (Button) layout.findViewById(R.id.closeInfo);
+    	closePopUp.setOnClickListener(new View.OnClickListener() {
+    		@Override
+    		public void onClick(View v) {
+    			infoWindow.dismiss();
+    		}
+    	});
 	}
 }

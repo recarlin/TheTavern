@@ -13,5 +13,6 @@
         android:id="@+id/characterText"
 	    android:layout_width="wrap_content"
 	    android:layout_height="wrap_content"
-	    android:text="Default Text"/>
+	    android:text="Default Text"
+	    style="@style/Basic"/>
 </LinearLayout>

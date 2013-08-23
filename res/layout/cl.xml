@@ -3,14 +3,15 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    style="@style/Basic">
     <TextView
+        android:id="@+id/testText"
 		android:layout_width="match_parent"
 		android:layout_height="wrap_content"
-		android:text="Characters"
 		style="@style/Title"/>
     <ListView
-        android:id="@+id/charactersList"
+        android:id="@+id/myCharacterList"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
     </ListView>

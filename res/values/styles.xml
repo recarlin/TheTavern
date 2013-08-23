@@ -10,7 +10,7 @@
 
     <!-- Application theme. -->
     <style name="AppTheme" parent="AppBaseTheme">
-        <item name="android:textColor">#AB7500</item>
+        
     </style>
     
     <style name="Basic">
